@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #6dd7f4;
+  }
+  
+  header {
+    background-color: #145b73;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .logo {
+    width: 60px;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  
+  main {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px); /* Tela inteira menos o header */
+    padding: 20px;
+  }
+  
+  .sobre-content {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 800px;
+    text-align: center;
+  }
+  
+  .sobre-content h1 {
+    font-size: 2.8em;
+    font-weight: 900;
+    margin-bottom: 30px;
+    color: black;
+  }
+  
+  .sobre-content p {
+    font-size: 1.3em;
+    color: black;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  
+  .sobre-content a {
+    color: #0000ee;
+    text-decoration: underline;
+  }
+  
+  .decor {
+    position: absolute;
+    width: 80px;
+  }
+  
+  .decor-top-left {
+    top: 20px;
+    left: 20px;
+  }
+  
+  .decor-top-right {
+    top: 20px;
+    right: 20px;
+  }
+  
+  .decor-bottom-left {
+    bottom: 20px;
+    left: 20px;
+  }
+  
+  .decor-bottom-right {
+    bottom: 20px;
+    right: 20px;
+  }
+  

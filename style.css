@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #6dd7f4;
+  }
+  
+  header {
+    background-color: #145b73;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .logo {
+    width: 60px;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    top: left;
+    
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  
+  main {
+    position: relative;
+    text-align: center;
+    padding: 60px 20px;
+  }
+  
+  .content h1 {
+    font-size: 150px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    color: black;
+    font-family:Circular-black;
+  }
+  
+  .content p {
+    font-size: 50px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 30px;
+    font-family: Circular-black;
+  }
+  
+  button {
+    padding: 12px 30px;
+    background-color: #1d132d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #321c4c;
+  }
+  
+ 
+  .decor {
+    position: absolute;
+    width: 100px;
+  }
+  
+  .decor-top-left {
+    top: 80px;
+    left: 20px;
+  }
+  
+  .decor-top-right {
+    top: 80px;
+    right: 20px;
+  }
+  
+  .decor-bottom-left {
+    bottom: 20px;
+    left: 20px;
+  }
+  
+  .decor-bottom-right {
+    bottom: 20px;
+    right: 20px;
+  }
+  /* Loader: tela cheia com fundo semi-transparente */
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.3s ease;
+}
+
+/* Bolinha girando */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #555;
+  border-top: 5px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Esconder loader */
+.hidden {
+  display: none;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

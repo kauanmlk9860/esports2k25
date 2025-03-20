@@ -1,0 +1,148 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #6dd7f4;
+  }
+  
+  header {
+    background-color: #145b73;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;  
+  }
+  
+  .logo {
+    width: 60px;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  
+  .decor {
+    position: absolute;
+    width: 100px;
+  }
+  
+  .decor-top-left {
+    top: 80px;
+    left: 20px;
+  }
+  
+  .decor-top-right {
+    top: 80px;
+    right: 20px;
+  }
+  
+  .decor-bottom-left {
+    bottom: 20px;
+    left: 20px;
+  }
+  
+  .decor-bottom-right {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .main-esportes {
+    font-family: Circular-black;
+    font-size: 20px;
+    position: relative;
+    text-align: center;
+    padding: 100px 20px 40px;
+    min-height: 100vh;
+
+  }
+  .titulo-principal {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 40px;
+  }
+  
+  .search-container {
+    margin-bottom: 40px;
+  }
+  
+  .search-bar {
+    padding: 10px 15px;
+    width: 300px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    margin-bottom: 15px;
+  }
+  
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .btn-detalhes {
+    padding: 10px 20px;
+    background-color: #1d132d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  
+  .btn-detalhes:hover {
+    background-color: #321c4c;
+  }
+  
+  .grid-times, .grid-jogadores {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 0 20px;
+    margin-top: 20px;
+  }
+  
+  .card-time, .card-jogador {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .card-time img, .card-jogador img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+  
+  .card-time h3, .card-jogador h3 {
+    color: #145b73;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+  }
+  
+  .card-time p, .card-jogador p {
+    font-size: 0.9em;
+    color: #444;
+    margin-bottom: 5px;
+  }
+  

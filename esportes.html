@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pesquisa | Athlete Hub</title>
+  <link rel="stylesheet" href="esportes.css" />
+  <link rel="stylesheet" href="loader.css" />
+</head>
+<body>
+  <header>
+    <img src="./img/logo.png" alt="Logo Athlete Hub" class="logo" id="link-home-logo" style="cursor: pointer;">
+    <nav>
+      <ul>
+        <li><a href="index.html" id="link-home">Home</a></li>
+        <li><a href="#" id="link-sobre">Sobre nós</a></li>
+        <li><a href="#" id="link-esportes">Athlete Hub</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Bolas decorativas -->
+  <img src="./img/soccer-ball-variant.png" alt="Futebol" class="decor decor-top-left">
+  <img src="./img/basketball.png" alt="Basquete" class="decor decor-top-right">
+  <img src="./img/tennis.png" alt="Tênis" class="decor decor-bottom-left">
+  <img src="./img/american-football.png" alt="Futebol Americano" class="decor decor-bottom-right">
+
+  <main class="main-esportes">
+    <h1 class="titulo-principal">Explore Times e Jogadores</h1>
+
+    <div class="search-container">
+      <input type="text" id="search-input" placeholder="Pesquisar times ou jogadores..." class="search-bar">
+      <div class="btn-container">
+        <button id="btn-times" class="btn-detalhes">Pesquisar Times</button>
+        <button id="btn-jogadores" class="btn-detalhes">Pesquisar Jogadores</button>
+      </div>
+    </div>
+
+    <section id="times-container" class="grid-times"></section>
+    <section id="jogadores-container" class="grid-jogadores"></section>
+  </main>
+
+  <!-- Loader (bolinha girando) -->
+  <div id="loader" class="loader hidden">
+    <div class="spinner"></div>
+  </div>
+
+  <script src="api.js"></script>
+</body>
+</html>

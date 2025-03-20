@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Athlete Hub</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="./loader.css">
+</head>
+<body>
+  <header>
+    <img src="./img/logo.png" alt="Logo Athlhe" class="logo">
+    <nav>
+      <ul>
+        <li><a href="sobre.html" id="link-sobre">Sobre nós</a></li> <!-- Remove o href="#" e coloca o caminho direto -->
+        <li><a href="#" id="link-esportes">Esportes</a></li>
+        <li><a href="#">Athlete Hub</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <img src="./img/soccer-ball-variant.png" alt="Futebol" class="decor decor-top-left">
+    <img src="./img/basketball.png" alt="Basquete" class="decor decor-top-right">
+    <img src="./img/tennis.png" alt="Tênis" class="decor decor-bottom-left">
+    <img src="./img/american-football.png" alt="Futebol Americano" class="decor decor-bottom-right">
+
+    <section class="content">
+      <h1>Para quem vive <br> e respira <br> esportes!</h1>
+      <p>Uma plataforma inovadora de esportes!!</p>
+      <button id="btn-acessar">Acessar</button>
+    </section>
+  </main>
+ 
+  <!-- Loader (bolinha girando) -->
+ <div id="loader" class="loader hidden">
+  <div class="spinner"></div>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
