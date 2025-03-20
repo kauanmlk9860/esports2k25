@@ -1,6 +1,6 @@
-// Redirecionar ao clicar no link "Athlete Hub"
+
 document.getElementById('link-esportes').addEventListener('click', (e) => {
-    e.preventDefault(); // Evita comportamento padrão do link
+    e.preventDefault(); 
     window.location.href = 'esportes.html';
   });
   const loader = document.getElementById('loader');
