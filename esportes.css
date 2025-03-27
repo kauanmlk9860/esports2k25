@@ -43,12 +43,12 @@
   }
   
   .decor-top-left {
-    top: 80px;
+    
     left: 20px;
   }
   
   .decor-top-right {
-    top: 80px;
+    
     right: 20px;
   }
   
@@ -67,7 +67,7 @@
     font-size: 20px;
     position: relative;
     text-align: center;
-    padding: 100px 20px 40px;
+    padding: 90px 10px ;
     min-height: 100vh;
 
   }
