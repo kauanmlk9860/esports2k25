@@ -70,8 +70,13 @@ function buscarTimes(query) {
             <p><strong>Estádio:</strong> ${time.strStadium || 'N/A'}</p>
             <p><strong>País:</strong> ${time.strCountry || 'N/A'}</p>
             <p><strong>Esporte:</strong> ${time.strSport || 'N/A'}</p>
-            <button class="btn-detalhes" onclick="mostrarDetalhesTime('${encodeURIComponent(JSON.stringify(time))}')">Ver mais detalhes</button>
           `;
+          
+          // Adiciona o evento de clique diretamente no card
+          card.addEventListener('click', () => {
+            mostrarDetalhesTime(time);
+          });
+          
           timesContainer.appendChild(card);
         });
       } else {
@@ -97,8 +102,13 @@ function buscarJogadores(query) {
             <p><strong>Time:</strong> ${jogador.strTeam || 'N/A'}</p>
             <p><strong>País:</strong> ${jogador.strNationality || 'N/A'}</p>
             <p><strong>Posição:</strong> ${jogador.strPosition || 'N/A'}</p>
-            <button class="btn-detalhes" onclick="mostrarDetalhesJogador('${encodeURIComponent(JSON.stringify(jogador))}')">Ver mais detalhes</button>
           `;
+          
+          // Adiciona o evento de clique diretamente no card
+          card.addEventListener('click', () => {
+            mostrarDetalhesJogador(jogador);
+          });
+          
           jogadoresContainer.appendChild(card);
         });
       } else {
@@ -107,13 +117,85 @@ function buscarJogadores(query) {
     });
 }
 
-// Detalhes com alert
-window.mostrarDetalhesTime = function(timeDataEncoded) {
-  const time = JSON.parse(decodeURIComponent(timeDataEncoded));
-  alert(`🏟️ ${time.strTeam}\n📍 País: ${time.strCountry}\n🏠 Estádio: ${time.strStadium}\n📝 Descrição: ${time.strDescriptionEN || 'Sem descrição disponível.'}`);
-};
+// Função para abrir o modal com as informações
+function openModal(content) {
+  const modal = document.getElementById('info-modal');
+  const modalContent = document.getElementById('modal-content');
+  
+  modalContent.innerHTML = content;
+  modal.style.display = 'block';
+  
+  // Fechar modal ao clicar no X
+  document.querySelector('.close-modal').onclick = function() {
+    modal.style.display = 'none';
+  };
+  
+  // Fechar modal ao clicar fora do conteúdo
+  window.onclick = function(event) {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  };
+}
 
-window.mostrarDetalhesJogador = function(jogadorDataEncoded) {
-  const jogador = JSON.parse(decodeURIComponent(jogadorDataEncoded));
-  alert(`👤 ${jogador.strPlayer}\n📍 País: ${jogador.strNationality}\n🏟️ Time: ${jogador.strTeam}\n🎯 Posição: ${jogador.strPosition}\n📝 Descrição: ${jogador.strDescriptionEN || 'Sem descrição disponível.'}`);
-};
+// Função para mostrar detalhes do time no modal
+function mostrarDetalhesTime(time) {
+  const content = `
+    <div class="modal-info">
+      <h2>${time.strTeam}</h2>
+      <img src="${time.strTeamBadge}" alt="${time.strTeam}" class="modal-img">
+    </div>
+    <div class="modal-info">
+      <h3>País:</h3>
+      <p>${time.strCountry || 'N/A'}</p>
+    </div>
+    <div class="modal-info">
+      <h3>Liga:</h3>
+      <p>${time.strLeague || 'N/A'}</p>
+    </div>
+    <div class="modal-info">
+      <h3>Ano de Fundação:</h3>
+      <p>${time.intFormedYear || 'N/A'}</p>
+    </div>
+    <div class="modal-info">
+      <h3>Estádio:</h3>
+      <p>${time.strStadium || 'N/A'}</p>
+    </div>
+    <div class="modal-info">
+      <h3>Descrição:</h3>
+      <p>${time.strDescriptionEN || 'Descrição não disponível'}</p>
+    </div>
+  `;
+  openModal(content);
+}
+
+// Função para mostrar detalhes do jogador no modal
+function mostrarDetalhesJogador(jogador) {
+  const content = `
+    <div class="modal-info">
+      <h2>${jogador.strPlayer}</h2>
+      ${jogador.strCutout ? `<img src="${jogador.strCutout}" alt="${jogador.strPlayer}" class="modal-img">` : ''}
+    </div>
+    <div class="modal-info">
+      <h3>Nacionalidade:</h3>
+      <p>${jogador.strNationality || 'N/A'}</p>
+    </div>
+    <div class="modal-info">
+      <h3>Time:</h3>
+      <p>${jogador.strTeam || 'N/A'}</p>
+    </div>
+    <div class="modal-info">
+      <h3>Posição:</h3>
+      <p>${jogador.strPosition || 'N/A'}</p>
+    </div>
+    <div class="modal-info">
+      <h3>Data de Nascimento:</h3>
+      <p>${jogador.dateBorn || 'N/A'}</p>
+    </div>
+    <div class="modal-info">
+      <h3>Descrição:</h3>
+      <p>${jogador.strDescriptionEN || 'Descrição não disponível'}</p>
+    </div>
+  `;
+  openModal(content);
+}
