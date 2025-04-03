@@ -53,9 +53,21 @@ btnJogadores.addEventListener('click', () => {
   }
 });
 
+function limparContainer(container) {
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
+}
+
+function criarElementoTexto(tag, texto) {
+  const elemento = document.createElement(tag);
+  elemento.textContent = texto;
+  return elemento;
+}
+
 function buscarTimes(query) {
-  timesContainer.innerHTML = '';
-  jogadoresContainer.innerHTML = '';
+  limparContainer(timesContainer);
+  limparContainer(jogadoresContainer);
 
   fetch(`https://www.thesportsdb.com/api/v1/json/3/searchteams.php?t=${query}`)
     .then(res => res.json())
@@ -64,15 +76,23 @@ function buscarTimes(query) {
         data.teams.forEach(time => {
           const card = document.createElement('div');
           card.className = 'card-time';
-          card.innerHTML = `
-            <img src="${time.strTeamBadge}" alt="${time.strTeam}" />
-            <h3>${time.strTeam}</h3>
-            <p><strong>Estádio:</strong> ${time.strStadium || 'N/A'}</p>
-            <p><strong>País:</strong> ${time.strCountry || 'N/A'}</p>
-            <p><strong>Esporte:</strong> ${time.strSport || 'N/A'}</p>
-          `;
           
-          // Adiciona o evento de clique diretamente no card
+          const img = document.createElement('img');
+          img.src = time.strTeamBadge;
+          img.alt = time.strTeam;
+          
+          const h3 = criarElementoTexto('h3', time.strTeam);
+          
+          const pEstadio = criarElementoTexto('p', `Estádio: ${time.strStadium || 'N/A'}`);
+          const pPais = criarElementoTexto('p', `País: ${time.strCountry || 'N/A'}`);
+          const pEsporte = criarElementoTexto('p', `Esporte: ${time.strSport || 'N/A'}`);
+          
+          card.appendChild(img);
+          card.appendChild(h3);
+          card.appendChild(pEstadio);
+          card.appendChild(pPais);
+          card.appendChild(pEsporte);
+          
           card.addEventListener('click', () => {
             mostrarDetalhesTime(time);
           });
@@ -80,14 +100,14 @@ function buscarTimes(query) {
           timesContainer.appendChild(card);
         });
       } else {
-        timesContainer.innerHTML = '<p>Nenhum time encontrado.</p>';
+        timesContainer.appendChild(criarElementoTexto('p', 'Nenhum time encontrado.'));
       }
     });
 }
 
 function buscarJogadores(query) {
-  timesContainer.innerHTML = '';
-  jogadoresContainer.innerHTML = '';
+  limparContainer(timesContainer);
+  limparContainer(jogadoresContainer);
 
   fetch(`https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=${query}`)
     .then(res => res.json())
@@ -96,15 +116,23 @@ function buscarJogadores(query) {
         data.player.forEach(jogador => {
           const card = document.createElement('div');
           card.className = 'card-jogador';
-          card.innerHTML = `
-            <img src="${jogador.strCutout || jogador.strThumb || 'default-player.png'}" alt="${jogador.strPlayer}" />
-            <h3>${jogador.strPlayer}</h3>
-            <p><strong>Time:</strong> ${jogador.strTeam || 'N/A'}</p>
-            <p><strong>País:</strong> ${jogador.strNationality || 'N/A'}</p>
-            <p><strong>Posição:</strong> ${jogador.strPosition || 'N/A'}</p>
-          `;
           
-          // Adiciona o evento de clique diretamente no card
+          const img = document.createElement('img');
+          img.src = jogador.strCutout || jogador.strThumb || 'default-player.png';
+          img.alt = jogador.strPlayer;
+          
+          const h3 = criarElementoTexto('h3', jogador.strPlayer);
+          
+          const pTime = criarElementoTexto('p', `Time: ${jogador.strTeam || 'N/A'}`);
+          const pPais = criarElementoTexto('p', `País: ${jogador.strNationality || 'N/A'}`);
+          const pPosicao = criarElementoTexto('p', `Posição: ${jogador.strPosition || 'N/A'}`);
+          
+          card.appendChild(img);
+          card.appendChild(h3);
+          card.appendChild(pTime);
+          card.appendChild(pPais);
+          card.appendChild(pPosicao);
+          
           card.addEventListener('click', () => {
             mostrarDetalhesJogador(jogador);
           });
@@ -112,7 +140,7 @@ function buscarJogadores(query) {
           jogadoresContainer.appendChild(card);
         });
       } else {
-        jogadoresContainer.innerHTML = '<p>Nenhum jogador encontrado.</p>';
+        jogadoresContainer.appendChild(criarElementoTexto('p', 'Nenhum jogador encontrado.'));
       }
     });
 }
@@ -122,7 +150,8 @@ function openModal(content) {
   const modal = document.getElementById('info-modal');
   const modalContent = document.getElementById('modal-content');
   
-  modalContent.innerHTML = content;
+  limparContainer(modalContent);
+  modalContent.appendChild(content);
   modal.style.display = 'block';
   
   // Fechar modal ao clicar no X
@@ -140,62 +169,81 @@ function openModal(content) {
 
 // Função para mostrar detalhes do time no modal
 function mostrarDetalhesTime(time) {
-  const content = `
-    <div class="modal-info">
-      <h2>${time.strTeam}</h2>
-      <img src="${time.strTeamBadge}" alt="${time.strTeam}" class="modal-img">
-    </div>
-    <div class="modal-info">
-      <h3>País:</h3>
-      <p>${time.strCountry || 'N/A'}</p>
-    </div>
-    <div class="modal-info">
-      <h3>Liga:</h3>
-      <p>${time.strLeague || 'N/A'}</p>
-    </div>
-    <div class="modal-info">
-      <h3>Ano de Fundação:</h3>
-      <p>${time.intFormedYear || 'N/A'}</p>
-    </div>
-    <div class="modal-info">
-      <h3>Estádio:</h3>
-      <p>${time.strStadium || 'N/A'}</p>
-    </div>
-    <div class="modal-info">
-      <h3>Descrição:</h3>
-      <p>${time.strDescriptionEN || 'Descrição não disponível'}</p>
-    </div>
-  `;
-  openModal(content);
+  const container = document.createElement('div');
+  
+  const infoPrincipal = document.createElement('div');
+  infoPrincipal.className = 'modal-info';
+  
+  const h2 = criarElementoTexto('h2', time.strTeam);
+  
+  const img = document.createElement('img');
+  img.src = time.strTeamBadge;
+  img.alt = time.strTeam;
+  img.className = 'modal-img';
+  
+  infoPrincipal.appendChild(h2);
+  infoPrincipal.appendChild(img);
+  container.appendChild(infoPrincipal);
+  
+  function adicionarInfo(titulo, valor) {
+    const divInfo = document.createElement('div');
+    divInfo.className = 'modal-info';
+    
+    const h3 = criarElementoTexto('h3', titulo);
+    const p = criarElementoTexto('p', valor || 'N/A');
+    
+    divInfo.appendChild(h3);
+    divInfo.appendChild(p);
+    container.appendChild(divInfo);
+  }
+  
+  adicionarInfo('País:', time.strCountry);
+  adicionarInfo('Liga:', time.strLeague);
+  adicionarInfo('Ano de Fundação:', time.intFormedYear);
+  adicionarInfo('Estádio:', time.strStadium);
+  adicionarInfo('Descrição:', time.strDescriptionEN || 'Descrição não disponível');
+  
+  openModal(container);
 }
 
 // Função para mostrar detalhes do jogador no modal
 function mostrarDetalhesJogador(jogador) {
-  const content = `
-    <div class="modal-info">
-      <h2>${jogador.strPlayer}</h2>
-      ${jogador.strCutout ? `<img src="${jogador.strCutout}" alt="${jogador.strPlayer}" class="modal-img">` : ''}
-    </div>
-    <div class="modal-info">
-      <h3>Nacionalidade:</h3>
-      <p>${jogador.strNationality || 'N/A'}</p>
-    </div>
-    <div class="modal-info">
-      <h3>Time:</h3>
-      <p>${jogador.strTeam || 'N/A'}</p>
-    </div>
-    <div class="modal-info">
-      <h3>Posição:</h3>
-      <p>${jogador.strPosition || 'N/A'}</p>
-    </div>
-    <div class="modal-info">
-      <h3>Data de Nascimento:</h3>
-      <p>${jogador.dateBorn || 'N/A'}</p>
-    </div>
-    <div class="modal-info">
-      <h3>Descrição:</h3>
-      <p>${jogador.strDescriptionEN || 'Descrição não disponível'}</p>
-    </div>
-  `;
-  openModal(content);
+  const container = document.createElement('div');
+  
+  const infoPrincipal = document.createElement('div');
+  infoPrincipal.className = 'modal-info';
+  
+  const h2 = criarElementoTexto('h2', jogador.strPlayer);
+  
+  infoPrincipal.appendChild(h2);
+  
+  if (jogador.strCutout) {
+    const img = document.createElement('img');
+    img.src = jogador.strCutout;
+    img.alt = jogador.strPlayer;
+    img.className = 'modal-img';
+    infoPrincipal.appendChild(img);
+  }
+  
+  container.appendChild(infoPrincipal);
+  
+  function adicionarInfo(titulo, valor) {
+    const divInfo = document.createElement('div');
+    divInfo.className = 'modal-info';
+    
+    const h3 = criarElementoTexto('h3', titulo);
+    const p = criarElementoTexto('p', valor || 'N/A');
+    
+    divInfo.appendChild(h3);
+    divInfo.appendChild(p);
+    container.appendChild(divInfo);
+  }
+  
+  adicionarInfo('Nacionalidade:', jogador.strNationality);
+  adicionarInfo('Time:', jogador.strTeam);
+  adicionarInfo('Posição:', jogador.strPosition);
+  adicionarInfo('Data de Nascimento:', jogador.dateBorn);
+  adicionarInfo('Descrição:', jogador.strDescriptionEN || 'Descrição não disponível');
+  
+  openModal(container);
 }
